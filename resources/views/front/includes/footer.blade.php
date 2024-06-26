@@ -1,25 +1,24 @@
-<!-- Footer area-->
 <div class="footer-area">
 
 <div class=" footer">
     <div class="container">
         <div class="row">
 
-            <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
                 <div class="single-footer">
                     <h4>About us </h4>
                     <div class="footer-title-line"></div>
 
-                    <img src="build/assets/front/assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
-                    <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
+                    <img src="{{asset('build/assets/front/assets/img/LOGO.svg')}}" alt="" class="wow pulse" data-wow-delay="1s">
+                    <p>Mkank is the perfect solution through which you can access the property that suits your desires.</p>
                     <ul class="footer-adress">
-                        <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                        <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                        <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                        <li><i class="pe-7s-map-marker strong"> </i> Cairo</li>
+                        <li><i class="pe-7s-mail strong"> </i> mkank2024@gmail.com</li>
+                        <li><i class="pe-7s-call strong"> </i> 01016934687</li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
                 <div class="single-footer">
                     <h4>Quick links </h4>
                     <div class="footer-title-line"></div>
@@ -33,62 +32,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                <div class="single-footer">
-                    <h4>Last News</h4>
-                    <div class="footer-title-line"></div>
-                    <ul class="footer-blog">
-                        <li>
-                            <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                <a href="single.html">
-                                    <img src="build/assets/front/assets/img/demo/small-proerty-2.jpg">
-                                </a>
-                                <span class="blg-date">12-12-2016</span>
 
-                            </div>
-                            <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                <h6> <a href="single.html">Add news functions </a></h6>
-                                <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                <a href="single.html">
-                                    <img src="build/assets/front/assets/img/demo/small-proerty-2.jpg">
-                                </a>
-                                <span class="blg-date">12-12-2016</span>
-
-                            </div>
-                            <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                <h6> <a href="single.html">Add news functions </a></h6>
-                                <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                <a href="single.html">
-                                    <img src="build/assets/front/assets/img/demo/small-proerty-2.jpg">
-                                </a>
-                                <span class="blg-date">12-12-2016</span>
-
-                            </div>
-                            <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                <h6> <a href="single.html">Add news functions </a></h6>
-                                <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                            </div>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
                 <div class="single-footer news-letter">
                     <h4>Stay in touch</h4>
                     <div class="footer-title-line"></div>
-                    <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
+                    <p> Mkank services allow you to buy or sell a property while providing essential information to help you take one of life’s biggest financial decisions.</p>
 
                     <form>
                         <div class="input-group">
@@ -116,22 +65,6 @@
     </div>
 </div>
 
-<div class="footer-copy text-center">
-    <div class="container">
-        <div class="row">
-            <div class="pull-left">
-                <span> (C) <a href="http://www.KimaroTec.com">KimaroTheme</a> , All rights reserved 2016  </span>
-            </div>
-            <div class="bottom-menu pull-right">
-                <ul>
-                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Property</a></li>
-                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">Faq</a></li>
-                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 </div>
