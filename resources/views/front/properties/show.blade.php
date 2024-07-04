@@ -30,13 +30,18 @@
                                     </a>
                                 </div>
 
-                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                    @foreach($property->images as $image)
-                                        <li data-thumb="{{ asset($image->thumbnail_path) }}">
-                                            <img src="{{ asset($image->image_path) }}" />
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                <div class="property-images">
+                                    <div id="primary-image" class="main-image">
+                                        <img src="{{ asset('images/properties/' . $property->primary_image) }}" />
+                                    </div>
+                                    {{-- <div id="additional-images" class="additional-images">
+                                        @foreach($property->images as $index => $image)
+                                            @if ($index < 3) <!-- Display only 3 additional images -->
+                                                <img src="{{ asset('images/properties/' . $image->image_path) }}" class="additional-image" />
+                                            @endif
+                                        @endforeach
+                                    </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +138,7 @@
                         <!-- Property share area -->
                         <div class="section property-share">
                             <h4 class="s-property-title">Share with your friends</h4>
-                            <div class="roperty-social">
+                            <div class="property-social">
                                 <ul>
                                     <li><a title="Share this on dribbble" href="#"><img src="{{ asset('build/assets/front/assets/img/social_big/dribbble_grey.png') }}"></a></li>
                                     <li><a title="Share this on facebook" href="#"><img src="{{ asset('build/assets/front/assets/img/social_big/facebook_grey.png') }}"></a></li>
@@ -149,6 +154,21 @@
                 <!-- Sidebar area -->
                 <div class="col-md-4 p0">
                     <aside class="sidebar sidebar-property blog-asside-right">
+                        <!-- Additional images area in sidebar -->
+                        <div class="section additional-images-sidebar">
+                            <h4 class="s-property-title">Additional Images</h4>
+                            <div class="additional-images-list-sidebar">
+                                @foreach($property->images as $index => $image)
+                                    @if ($index < 3) <!-- Display only 3 additional images -->
+                                        <div class="additional-image-item-sidebar">
+                                            <img src="{{ asset('images/properties/' . $image->image_path) }}" class="additional-image-thumb-sidebar" />
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- End additional images area -->
+
                         <!-- Similar properties widget -->
                         <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
                             <div class="panel-heading">
@@ -159,7 +179,7 @@
                                     {{-- @foreach($similar_properties as $similar)
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="{{ route('properties.show', $similar->id) }}"><img src="{{ asset($similar->thumbnail) }}"></a>
+                                                <a href="{{ route('properties.show', $similar->id) }}"><img src="{{ asset('images/properties/' . $similar->thumbnail) }}"></a>
                                                 <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -176,24 +196,21 @@
                         </div>
                         <!-- End similar properties widget -->
 
-                        <!-- Dealer widget -->
-                        <div class="dealer-widget">
-                            <div class="dealer-content">
+                        <!-- Company widget -->
+                        <div class="company-widget">
+                            <div class="company-content">
                                 <div class="inner-wrapper">
-                                    <!-- Replace with actual dealer information -->
-                                    {{-- <h3 class="dealer-name"><a href="#">{{ $property->agent->name }}</a></h3> --}}
-                                    {{-- <span>{{ $property->agent->role }}</span>
-                                    <!-- Add social media links here if available -->
-                                    <ul class="dealer-contacts">
-                                        <li><i class="pe-7s-map-marker strong"></i> {{ $property->agent->address }}</li>
-                                        <li><i class="pe-7s-mail strong"></i> {{ $property->agent->email }}</li>
-                                        <li><i class="pe-7s-call strong"></i> {{ $property->agent->phone }}</li>
+                                    <h3 class="company-name"><a href="#">{{ $property->company->name }}</a></h3>
+                                    <ul class="company-contacts">
+                                        <li><i class="pe-7s-map-marker strong"></i> {{ $property->company->address }}</li>
+                                        <li><i class="pe-7s-mail strong"></i> {{ $property->company->email }}</li>
+                                        <li><i class="pe-7s-call strong"></i> {{ $property->company->phone }}</li>
                                     </ul>
-                                    <p>{{ $property->agent->bio }}</p> --}}
+                                    <p>{{ $property->company->description }}</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- End dealer widget -->
+                        <!-- End company widget -->
                     </aside>
                 </div>
                 <!-- End sidebar area -->
@@ -202,4 +219,60 @@
         </div>
     </div>
     <!-- End property area -->
+
+    <!-- Modal for displaying all images -->
+    <div id="imageModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Property Images</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="{{ asset('images/properties/' . $property->primary_image) }}" />
+                            </div>
+                            @foreach($property->images as $image)
+                                <div class="item">
+                                    <img src="{{ asset('images/properties/' . $image->image_path) }}" />
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#imageCarousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#imageCarousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal for displaying all images -->
 @endsection
+
+{{-- @push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Initialize variables
+            var primaryImage = $('#primary-image img');
+            var additionalImages = $('.additional-image, .additional-image-thumb-sidebar');
+
+            // Show all images in modal when clicking on any image
+            primaryImage.on('click', function() {
+                $('#imageModal').modal('show');
+            });
+
+            additionalImages.on('click', function() {
+                $('#imageModal').modal('show');
+            });
+        });
+    </script>
+@endpush --}}

@@ -74,6 +74,16 @@
 
 
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Toggle search form visibility
+                $('#searchIcon').click(function(e) {
+                    e.preventDefault();
+                    $('#searchForm').toggle(); // Toggle visibility of the search form
+                });
+            });
+        </script>
 
 
         <script src="{{asset('build/assets/front/assets/js/modernizr-2.6.2.min.js')}}"></script>

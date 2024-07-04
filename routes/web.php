@@ -103,7 +103,7 @@ Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('
 Route::post('admin/login', [AdminAuthController::class, 'login']);
 Route::post('admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::middleware('auth:customer')->group(function () {
+Route::middleware('customer')->group(function () {
     Route::get('/customer/dashboard', function () {
         return view('customer.dashboard');
     })->name('customer.dashboard');
@@ -119,7 +119,7 @@ Route::middleware('auth:customer')->group(function () {
 
 
 
-Route::middleware('auth:company')->group(function () {
+Route::middleware('company')->group(function () {
     Route::get('properties/create', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('properties', [PropertyController::class, 'store'])->name('properties.store');
     Route::get('properties/{property}/edit', [PropertyController::class, 'edit'])->name('properties.edit');

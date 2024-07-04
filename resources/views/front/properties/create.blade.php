@@ -134,7 +134,7 @@
                                                     <option value="2">2 Beds</option>
                                                     <option value="3">3 Beds</option>
                                                     <option value="4">4 Beds</option>
-                                                    <option value="more">More than 4 Beds</option>
+                                                    <option value="5">More than 4 Beds</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@
                                                     <option value="1">1 Bath</option>
                                                     <option value="2">2 Baths</option>
                                                     <option value="3">3 Baths</option>
-                                                    <option value="more">More than 3 Baths</option>
+                                                    <option value="4">More than 3 Baths</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -161,7 +161,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="property-images">Choose Images :</label>
-                                                <input class="form-control" type="file" name="image" id="property-images" multiple>
+                                                <input class="form-control" type="file" name="images[]" id="property-images" multiple>
                                                 <p class="help-block">Select multiple images for your property.</p>
                                             </div>
                                         </div>

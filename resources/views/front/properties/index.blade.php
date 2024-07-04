@@ -1,4 +1,5 @@
 @extends('layouts.front.site')
+
 @section('content')
 <div class="properties-area recent-property" style="background-color: #FFF;">
     <div class="container">
@@ -23,15 +24,15 @@
                         <div class="items-per-page">
                             <label for="items_per_page"><b>Property per page :</b></label>
                             <div class="sel">
-                                <select id="items_per_page" name="per_page">
-                                    <option value="3">3</option>
-                                    <option value="6">6</option>
-                                    <option value="9">9</option>
-                                    <option selected="selected" value="12">12</option>
-                                    <option value="15">15</option>
-                                    <option value="30">30</option>
-                                    <option value="45">45</option>
-                                    <option value="60">60</option>
+                                <select id="items_per_page" name="per_page" onchange="window.location.href=this.value;">
+                                    <option value="{{ route('properties.index', ['per_page' => 3]) }}" {{ request('per_page') == 3 ? 'selected' : '' }}>3</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 6]) }}" {{ request('per_page') == 6 ? 'selected' : '' }}>6</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 9]) }}" {{ request('per_page') == 9 ? 'selected' : '' }}>9</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 12]) }}" {{ request('per_page') == 12 ? 'selected' : '' }}>12</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 15]) }}" {{ request('per_page') == 15 ? 'selected' : '' }}>15</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 30]) }}" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 45]) }}" {{ request('per_page') == 45 ? 'selected' : '' }}>45</option>
+                                    <option value="{{ route('properties.index', ['per_page' => 60]) }}" {{ request('per_page') == 60 ? 'selected' : '' }}>60</option>
                                 </select>
                             </div><!--/ .sel-->
                         </div><!--/ .items-per-page-->
@@ -50,7 +51,7 @@
                             <div class="box-two proerty-item">
                                 <div class="item-thumb">
                                     <a href="{{ route('properties.show', $property->id) }}">
-                                        <img src="{{ asset('storage/property_images/' . $property->primary_image) }}">
+                                        <img src="{{ asset('images/properties/' . $property->primary_image) }}" alt="{{ $property->title }}">
                                     </a>
                                 </div>
 
@@ -61,8 +62,8 @@
                                     <span class="proerty-price pull-right"> $ {{ number_format($property->price, 2) }}</span>
                                     <p style="display: none;">{{ $property->description }}</p>
                                     <div class="property-icon">
-                                        <img src="{{ asset('build/assets/front/assets/img/icon/bed.png') }}"> ({{ $property->beds }}) |
-                                        <img src="{{ asset('build/assets/front/assets/img/icon/shawer.png') }}"> ({{ $property->baths }}) |
+                                        <img src="{{ asset('build/assets/front/assets/img/icon/bed.png') }}" alt="bed"> ({{ $property->beds }}) |
+                                        <img src="{{ asset('build/assets/front/assets/img/icon/shawer.png') }}" alt="bath"> ({{ $property->baths }}) |
                                     </div>
                                 </div>
                             </div>
@@ -74,8 +75,7 @@
                 <div class="col-md-12">
                     <div class="pull-right">
                         <div class="pagination">
-                            {{-- {{ $properties->links() }} --}}
-                            link
+                            {{ $properties->appends(request()->input())->links() }}
                         </div>
                     </div>
                 </div>

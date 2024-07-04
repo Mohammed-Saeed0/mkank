@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('phone')->nullable(); // Added
-            $table->string('primary_image')->nullable(); // Added
+            $table->string('primary_image'); // Added
             $table->enum('purpose', ['sale', 'rent']);
             $table->enum('type', ['residential', 'commercial']);
             $table->decimal('price', 15, 2);
@@ -25,7 +25,6 @@ return new class extends Migration
             $table->integer('beds')->nullable();
             $table->integer('baths')->nullable();
             $table->decimal('geo', 8, 2)->nullable();
-            $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');

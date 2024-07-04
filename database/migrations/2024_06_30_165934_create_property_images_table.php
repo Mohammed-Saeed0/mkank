@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
 
             //$table->text("filename")->unique();
-	        $table->text("filename");
-
+            $table->string('image_path');
             $table->timestamps();
         });
     }
