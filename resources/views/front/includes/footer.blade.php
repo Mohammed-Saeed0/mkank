@@ -23,12 +23,12 @@
                     <h4>Quick links </h4>
                     <div class="footer-title-line"></div>
                     <ul class="footer-menu">
-                        <li><a href="properties.html">Properties</a>  </li>
+                        <li><a href="/properties">Properties</a>  </li>
                         <li><a href="#">Services</a>  </li>
-                        <li><a href="submit-property.html">Submit property </a></li>
-                        <li><a href="contact.html">Contact us</a></li>
-                        <li><a href="faq.html">fqa</a>  </li>
-                        <li><a href="faq.html">Terms </a>  </li>
+                        <li><a href="{{route('properties.create')}}">Add Property </a></li>
+                        <li><a href="/contact">Contact us</a></li>
+                        <li><a href="/faq">faq</a>  </li>
+                        <li><a href="/faq">Terms </a>  </li>
                     </ul>
                 </div>
             </div>
@@ -51,11 +51,11 @@
 
                     <div class="social pull-right">
                         <ul>
-                            <li><a class="wow fadeInUp animated" href="https://twitter.com/kimarotec"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="wow fadeInUp animated" href="https://www.facebook.com/kimarotec" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="wow fadeInUp animated" href="https://plus.google.com/kimarotec" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                            <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
                         </ul>
                     </div>
                 </div>

@@ -421,7 +421,7 @@
     <section class="section">
        <div id="like_and_subscribe">
           <div class="hdcarousel_item">
-             <a href="company-profile.html">      <img src="{{asset('build/assets/front/assets/img/companies logo/متواضع.png')}}" alt=""></a>
+             <a href="/company/1">      <img src="{{asset('build/assets/front/assets/img/companies logo/متواضع.png')}}" alt=""></a>
            </div>
           <div class="hdcarousel_item"><img src="{{asset('build/assets/front/assets/img/companies logo/images123.png')}}" alt=""></div>
           <div class="hdcarousel_item"><img src="{{asset('build/assets/front/assets/img/companies logo/245.jpg')}}" alt=""></div>

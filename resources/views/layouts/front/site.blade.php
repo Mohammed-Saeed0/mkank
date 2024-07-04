@@ -33,12 +33,18 @@
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/owl.carousel.css')}}">
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/owl.theme.css')}}">
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/owl.transitions.css')}}">
+        <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/wizard.css')}}">
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/style.css')}}">
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/responsive.css')}}">
+
+        @yield('cssFiles')
 
 
     </head>
     <body>
+        <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
 
         <!-- <div id="preloader">
             <div id="status">&nbsp;</div>
@@ -85,6 +91,10 @@
 
 <script src="{{asset('build/assets/front/assets/js/icheck.min.js')}}"></script>
 <script src="{{asset('build/assets/front/assets/js/price-range.js')}}"></script>
+
+<script src="{{asset('build/assets/front/assets/js/jquery.bootstrap.wizard.js')}}" type="text/javascript"></script>
+<script src="{{asset('build/assets/front/assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('build/assets/front/assets/js/wizard.js')}}"></script>
 
 <script src="{{asset('build/assets/front/assets/js/main.js')}}"></script>
 
