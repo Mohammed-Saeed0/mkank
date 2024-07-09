@@ -20,19 +20,41 @@ class CompanyAuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:companies',
+            'phone' => 'required|string|max:15',
             'password' => 'required|string|min:8|confirmed',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'postal_number' => 'nullable|string|max:255',
+            'tax_card' => 'nullable|string|max:255',
+            'company_description' => 'nullable|string',
+            'company_location' => 'nullable|string|max:255',
         ]);
+
+        // Handle the logo upload
+        if ($request->hasFile('logo')) {
+            $file_extension = $request->logo->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'images/companies';
+            $request->logo->move(public_path($path), $file_name);
+            $logo_url = $path . '/' . $file_name;
+        }
 
         $company = Company::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
+            'logo' => $logo_url,
+            'postal_number' => $request->postal_number,
+            'tax_card' => $request->tax_card,
+            'company_description' => $request->company_description,
+            'company_location' => $request->company_location,
         ]);
 
         Auth::guard('company')->login($company);
 
-        return redirect()->route('company.submit');
+        return redirect()->route('properties.create');
     }
+
 
     public function showLoginForm()
     {

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\Property;
+use Illuminate\Support\Facades\Log; // Add this import
 use App\Models\PropertyImage;
+use App\Services\DocumentSearchEngine;
 
 
 class PropertyController extends Controller
@@ -24,7 +27,7 @@ class PropertyController extends Controller
         $properties = Property::paginate($perPage);
 
         // Return the view with the paginated properties
-        return view('front.properties.index', compact('properties'));
+        return view('front.properties.index', ['properties' => $properties]);
     }
 
     public function create()
@@ -37,25 +40,16 @@ class PropertyController extends Controller
             $request->validate([
                 'title' => 'required',
                 'purpose' => 'required',
+                'description' => 'required',
                 'type' => 'required',
                 'price' => 'required|numeric',
                 'status' => 'required',
                 'city' => 'required',
                 'phone' => 'nullable|string',
-                'primary_image' => 'required|nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'primary_image' => 'required|nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
-            // $property = new Property($request->except('primary_image'));
-
-            // if ($request->hasFile('primary_image')) {
-            //     $path = $request->file('primary_image')->store('property_images');
-            //     $property->primary_image = $path;
-            // }
-
-            // $property->save();
-
-            // Handle the primary image upload
             $file_extension = $request->primary_image->getClientOriginalExtension();
             $file_name = time() . '.' . $file_extension;
             $path = 'images/properties';
@@ -106,10 +100,24 @@ class PropertyController extends Controller
 
             return redirect()->route('properties.index')->with('success', 'Property added successfully');
         }
-    public function show(Property $property)
-    {
-        return view('front.properties.show', compact('property'));
-    }
+        public function show($id)
+        {
+            // Assuming $id is the property_id
+            $property = Property::findOrFail($id); // Adjust model as per your implementation
+
+            // Make HTTP request to Flask server
+            $response = Http::get('http://127.0.0.1:5000/api/find_similar_properties', [
+                'property_id' => $id,
+            ]);
+
+            $similarProperties = $response->json();
+
+            // Return view with property and similar properties data
+            return view('front.properties.show', [
+                'property' => $property,
+                'similarProperties' => $similarProperties,
+            ]);
+        }
 
     public function edit(Property $property)
     {
@@ -123,7 +131,7 @@ class PropertyController extends Controller
             'price' => 'required|numeric',
             'primary_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'description' => 'nullable',
+            'description' => 'required',
             'purpose' => 'required',
             'type' => 'required',
             'status' => 'required',
@@ -203,7 +211,61 @@ class PropertyController extends Controller
         $property->delete();
         return redirect()->route('front.properties.index')->with('success', 'Property deleted successfully.');
     }
+    public function search(Request $request)
+{
+    $query = Property::query();
 
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+    if ($request->filled('city')) {
+        $query->where('city', $request->city);
+    }
+    if ($request->filled('purpose')) {
+        $query->where('purpose', $request->purpose);
+    }
+    if ($request->filled('beds')) {
+        $query->where('beds', $request->beds);
+    }
+    if ($request->filled('baths')) {
+        $query->where('baths', $request->baths);
+    }
+    if ($request->filled('geo')) {
+        $query->where('geo', '>=', $request->geo);
+    }
+    if ($request->filled('min_price')) {
+        $query->where('price', '>=', $request->min_price);
+    }
+    if ($request->filled('max_price')) {
+        $query->where('price', '<=', $request->max_price);
+    }
+
+    $properties = $query->paginate(9);
+
+    return view('front.properties.filter', compact('properties'));
+}
+
+
+    // public function search(Request $request)
+    // {
+    //     $searchTerm = $request->input('query');
+
+    //     $properties = Property::all();
+    //     $searchEngine = new DocumentSearchEngine();
+
+    //     // Build the documents and preprocess them
+    //     $searchEngine->build_dic($properties);
+    //     $searchEngine->preprocess();
+
+    //     // Get the search results
+    //     $resultIds = $searchEngine->search($searchTerm);
+
+    //     // Retrieve properties based on the search results
+    //     $results = Property::whereIn('id', $resultIds)->paginate(9);
+
+    //     // Render the search results view
+    //     return view('front.properties.search', ['properties' => $results]);
+    // }
 
     // public function allProperties(){
     //     return view('front.properties');

@@ -39,6 +39,35 @@ class CustomerAuthController extends Controller
         return view('auth.customer-login');
     }
 
+    public function edit()
+    {
+        $customer = Auth::guard('customer')->user();
+        return view('auth.customer-edit', compact('customer'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:customers,email,' . Auth::id(),
+            // 'phone' => 'nullable|string|max:15',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $customer = Auth::guard('customer')->user();
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        // $customer->phone = $request->phone;
+
+        if ($request->filled('password')) {
+            $customer->password = Hash::make($request->password);
+        }
+
+        $customer->save();
+
+        return redirect()->route('customer.profile')->with('success', 'Profile updated successfully.');
+    }
+
     public function login(Request $request)
     {
         $request->validate([

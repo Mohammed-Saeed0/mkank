@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('purpose', ['sale', 'rent']);
             $table->enum('type', ['residential', 'commercial']);
             $table->decimal('price', 15, 2);
-            $table->text('description')->nullable();
+            $table->text('description');
             $table->enum('status', ['ready', 'under', 'future']);
             $table->enum('city', ['oboor', 'badr', 'capital', 'zayed']);
             $table->integer('beds')->nullable();

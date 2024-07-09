@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="page-head-content">
-                <h1 class="page-title">Submit new property</h1>
+                <h1 class="page-title">Add new property</h1>
             </div>
         </div>
     </div>
@@ -31,8 +31,8 @@
                         @csrf
                         <div class="wizard-header">
                             <h3>
-                                <b>Submit</b> YOUR PROPERTY <br>
-                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
+                                <b>Add</b> YOUR PROPERTY <br>
+                                <small>be careful , to help you to addvertise your property</small>
                             </h3>
                         </div>
 
@@ -106,7 +106,7 @@
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Property Status :</label>
-                                                <select id="basic" name="status" class="selectpicker show-tick form-control">
+                                                <select id="basic" name="status" class="form-control">
                                                     <option value="ready">Ready</option>
                                                     <option value="under">Under Construction</option>
                                                     <option value="future">In the Future</option>

@@ -15,9 +15,8 @@ class Company extends Model implements AuthenticatableContract
     use HasFactory;
     protected $guard = 'company';
 
-    protected $fillable =
-    [
-        'name', 'email', 'password',
+    protected $fillable = [
+        'name', 'email', 'phone', 'password', 'logo', 'postal_number', 'tax_card', 'company_description', 'company_location'
     ];
 
     protected $hidden =
@@ -29,4 +28,9 @@ class Company extends Model implements AuthenticatableContract
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
 }

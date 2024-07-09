@@ -9,6 +9,11 @@ class Property extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    // public static function search($query)
+    // {
+    //     return self::where('description', 'like', '%' . $query . '%')
+    //                 ->orWhere('title', 'like', '%' . $query . '%');
+    // }
 
     public function company()
     {

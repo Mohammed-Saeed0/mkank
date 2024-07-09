@@ -31,16 +31,9 @@
                                 </div>
 
                                 <div class="property-images">
-                                    <div id="primary-image" class="main-image">
+                                    <div id="primary-image" class="main-image primary">
                                         <img src="{{ asset('images/properties/' . $property->primary_image) }}" />
                                     </div>
-                                    {{-- <div id="additional-images" class="additional-images">
-                                        @foreach($property->images as $index => $image)
-                                            @if ($index < 3) <!-- Display only 3 additional images -->
-                                                <img src="{{ asset('images/properties/' . $image->image_path) }}" class="additional-image" />
-                                            @endif
-                                        @endforeach
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -96,44 +89,23 @@
                         </div>
                         <!-- End description area -->
 
-                        <!-- Additional details area -->
-                        <div class="section additional-details">
-                            <h4 class="s-property-title">Additional Details</h4>
-                            <ul class="additional-details-list clearfix">
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->waterfront ? 'Yes' : 'No' }}</span>
-                                </li>
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Built In</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->built_in }}</span>
-                                </li>
-                                <!-- Add more additional details here -->
-                            </ul>
-                        </div>
-                        <!-- End additional details area -->
-
-                        <!-- Features area -->
-                        <div class="section property-features">
-                            <h4 class="s-property-title">Features</h4>
-                            <ul>
-                                {{-- @foreach($property->features as $feature)
-                                    <li><a href="#">{{ $feature->name }}</a></li>
-                                @endforeach --}}
-                            </ul>
-                        </div>
-                        <!-- End features area -->
-
-                        <!-- Property video area -->
-                        <div class="section property-video">
-                            <h4 class="s-property-title">Property Video</h4>
-                            <div class="video-thumb">
-                                <a class="video-popup" href="{{ $property->video_url }}" title="Virtual Tour">
-                                    <img src="{{ asset('build/assets/front/assets/img/property-video.jpg') }}" class="img-responsive wp-post-image" alt="Property Video">
-                                </a>
+                        <!-- Additional images area -->
+                        <div class="section additional-images">
+                            <h4 class="s-property-title">Additional Images</h4>
+                            <div class="additional-images-list">
+                                @foreach($property->images as $index => $image)
+                                    @if ($index < 2) <!-- Display only 2 additional images -->
+                                        <img src="{{ asset('images/properties/' . $image->image_path) }}" class="additional-image" />
+                                    @endif
+                                @endforeach
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imageModal">
+                                    More Images
+                                </button>
                             </div>
                         </div>
-                        <!-- End property video area -->
+                        <!-- End additional images area -->
+
+
 
                         <!-- Property share area -->
                         <div class="section property-share">
@@ -148,28 +120,61 @@
                         </div>
                         <!-- End property share area -->
 
+        <!-- Similar properties widget -->
+    <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
+        <div class="panel-heading">
+            <h3 class="panel-title">Similar Properties</h3>
+        </div>
+        <div class="panel-body recent-property-widget">
+            <ul>
+            @if (!empty($similarProperties))
+                @foreach ($similarProperties as $similar)
+                    <li>
+                        <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                            <a href="{{ route('properties.show', $similar['id']) }}">
+                                <img src="{{ asset('images/properties/' . $similar['primary_image']) }}">
+                            </a>
+                            <span class="property-seeker">
+                                <b class="b-1">A</b>
+                                <b class="b-2">S</b>
+                            </span>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                            <h6><a href="{{ route('properties.show', $similar['id']) }}">{{ $similar['title'] }}</a></h6>
+                            <span class="property-price">${{ number_format($similar['price'], 2) }}</span>
+                        </div>
+                    </li>
+                @endforeach
+            @else
+                <p>No similar properties found.</p>
+            @endif
+            </ul>
+        </div>
+    </div>
+    <!-- End similar properties widget -->
+
                     </div>
                 </div>
 
                 <!-- Sidebar area -->
                 <div class="col-md-4 p0">
                     <aside class="sidebar sidebar-property blog-asside-right">
-                        <!-- Additional images area in sidebar -->
-                        <div class="section additional-images-sidebar">
-                            <h4 class="s-property-title">Additional Images</h4>
-                            <div class="additional-images-list-sidebar">
-                                @foreach($property->images as $index => $image)
-                                    @if ($index < 3) <!-- Display only 3 additional images -->
-                                        <div class="additional-image-item-sidebar">
-                                            <img src="{{ asset('images/properties/' . $image->image_path) }}" class="additional-image-thumb-sidebar" />
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-                        <!-- End additional images area -->
-
-                        <!-- Similar properties widget -->
+                                            <!-- Company widget -->
+                                            <div class="company-widget">
+                                                <div class="company-content">
+                                                    <div class="inner-wrapper">
+                                                        <h3 class="company-name"><a href="#">{{ $property->company->name }}</a></h3>
+                                                        <ul class="company-contacts">
+                                                            <li><i class="pe-7s-map-marker strong"></i> {{ $property->company->address }}</li>
+                                                            <li><i class="pe-7s-mail strong"></i> {{ $property->company->email }}</li>
+                                                            <li><i class="pe-7s-call strong"></i> {{ $property->company->phone }}</li>
+                                                        </ul>
+                                                        <p>{{ $property->company->description }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End company widget -->
+                        {{-- <!-- Similar properties widget -->
                         <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Similar Properties</h3>
@@ -193,24 +198,8 @@
                                     @endforeach --}}
                                 </ul>
                             </div>
-                        </div>
+                        {{-- </div> --}}
                         <!-- End similar properties widget -->
-
-                        <!-- Company widget -->
-                        <div class="company-widget">
-                            <div class="company-content">
-                                <div class="inner-wrapper">
-                                    <h3 class="company-name"><a href="#">{{ $property->company->name }}</a></h3>
-                                    <ul class="company-contacts">
-                                        <li><i class="pe-7s-map-marker strong"></i> {{ $property->company->address }}</li>
-                                        <li><i class="pe-7s-mail strong"></i> {{ $property->company->email }}</li>
-                                        <li><i class="pe-7s-call strong"></i> {{ $property->company->phone }}</li>
-                                    </ul>
-                                    <p>{{ $property->company->description }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End company widget -->
                     </aside>
                 </div>
                 <!-- End sidebar area -->
@@ -232,7 +221,7 @@
                     <div id="imageCarousel" class="carousel slide" data-ride="carousel">
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
+                            <div class="item active primary">
                                 <img src="{{ asset('images/properties/' . $property->primary_image) }}" />
                             </div>
                             @foreach($property->images as $image)
@@ -258,12 +247,12 @@
     <!-- End modal for displaying all images -->
 @endsection
 
-{{-- @push('scripts')
+@push('scripts')
     <script>
         $(document).ready(function() {
             // Initialize variables
             var primaryImage = $('#primary-image img');
-            var additionalImages = $('.additional-image, .additional-image-thumb-sidebar');
+            var additionalImages = $('.additional-image');
 
             // Show all images in modal when clicking on any image
             primaryImage.on('click', function() {
@@ -275,4 +264,4 @@
             });
         });
     </script>
-@endpush --}}
+@endpush

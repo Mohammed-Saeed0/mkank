@@ -1,9 +1,5 @@
 @extends('layouts.front.site')
 
-{{-- @section('cssFiles')
-<link rel="stylesheet" href="{{asset('build/assets/front/assets/css/style-register.css')}}">
-@endsection --}}
-
 @section('content')
 
 <div class="page-head">

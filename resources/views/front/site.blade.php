@@ -11,244 +11,70 @@
                 </div>
             </div>
             <div class="container slider-content">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                <div class="row2">
+                    <div class="col-lg-9 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12" >
                         <!-- <h2>property Searching Just Got So Easy</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p> -->
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
-
-                            <form action="" class=" form-inline">
-                                <button class="btn  toggle-btn" type="button"><i class="fa fa-bars"></i></button>
+                            <form action="{{ route('properties.filter') }}" method="GET" class="form-inline">
+                                @csrf
+                                <button class="btn toggle-btn" type="button"><i class="fa fa-bars"></i></button>
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Key word">
-                                </div>
-                                <div class="form-group">
-                                    <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
-
-                                        <option>Cairo</option>
-                                        <option>Alexandria</option>
-                                        <option>Mansoura</option>
-                                        <option>Giza</option>
-                                        <option>Sheikh Zayed</option>
-                                        <option>Obour</option>
-                                        <option>Madinaty </option>
-                                        <option>The New Administrative Capital</option>
+                                    <select name="status" class="form-control">
+                                        <option value="">Select Status</option>
+                                        <option value="ready">Ready</option>
+                                        <option value="under">Under Construction</option>
+                                        <option value="future">In the Future</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> Purpose </option>
-                                        <option>Rent </option>
-                                        <option>Buy</option>
-
+                                    <select id="city" name="city" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
+                                        <option value="">Select City</option>
+                                        <option value="oboor">Oboor</option>
+                                        <option value="badr">Badr</option>
+                                        <option value="capital">Capital Administrative</option>
+                                        <option value="zayed">Zayed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select id="purpose" name="purpose" class="selectpicker show-tick form-control">
+                                        <option value="">Select Purpose</option>
+                                        <option value="sale">Sale</option>
+                                        <option value="rent">Rent</option>
                                     </select>
                                 </div>
                                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
 
                                 <div style="display: none;" class="search-toggle">
-
-                                    <div class="search-row">
-
-                                        <div class="form-group mar-r-20">
-                                            <label for="price-range">Price range (EGP):</label>
-                                            <input type="text" class="span2" value="" data-slider-min="400000"
-                                                   data-slider-max="3500000" data-slider-step="10000"
-                                                   data-slider-value="[932000,2820000]" id="price-range" ><br />
-                                            <b class="pull-left color">400000</b>
-                                            <b class="pull-right color">3500000</b>
+                                    <div class="row1">
+                                        <div class="form-group">
+                                            <select name="beds" class="sayed">
+                                                <option value="">Beds</option>
+                                                <option value="1">1 Bed</option>
+                                                <option value="2">2 Beds</option>
+                                                <option value="3">3 Beds</option>
+                                                <option value="4">4 Beds</option>
+                                                <option value="5">More Than 4 Beds</option>
+                                            </select>
                                         </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group mar-l-20">
-                                            <label for="property-geo">Property geo (m2) :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="100"
-                                                   data-slider-max="2800" data-slider-step="5"
-                                                   data-slider-value="[400,2000]" id="property-geo" ><br />
-                                            <b class="pull-left color">400m</b>
-                                            <b class="pull-right color">2800m</b>
+                                        <div class="form-group">
+                                            <select name="baths" class="sayed">
+                                                <option value="">Baths</option>
+                                                <option value="1">1 Bath</option>
+                                                <option value="2">2 Baths</option>
+                                                <option value="3">3 Baths</option>
+                                                <option value="4">More Than 3 Baths</option>
+                                            </select>
                                         </div>
-                                        <!-- End of  -->
+                                        <input type="number" class="form-control" name="geo" placeholder="Area (Sq. M.)" min="40" max="2800" step="10">
+                                        <input type="number" class="form-control" name="min_price" placeholder="Lower Price" min="400000" step="10000" max="35000000">
+                                        <input type="number" class="form-control" name="max_price" placeholder="Higher Price" min="400000" max="35000000" step="10000">
                                     </div>
-
-                                    <div class="search-row">
-
-                                        <div class="form-group mar-r-20">
-                                            <label for="price-range"> Baths :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="1"
-                                                   data-slider-max="6" data-slider-step="1"
-                                                   data-slider-value="[2,4]" id="min-baths" ><br />
-                                            <b class="pull-left color">1</b>
-                                            <b class="pull-right color">6</b>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group mar-l-20">
-                                            <label for="property-geo">Beds :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="1"
-                                                   data-slider-max="8" data-slider-step="1"
-                                                   data-slider-value="[2,6]" id="min-bed" ><br />
-                                            <b class="pull-left color">1</b>
-                                            <b class="pull-right color">8</b>
-                                        </div>
-                                        <!-- End of  -->
-
-                                    </div>
-                                    <br>
-                                    <div class="search-row">
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>       <input type="checkbox"> Apartment
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Villa
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Duplex
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-                                    </div>
-
-                                    <div class="search-row">
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> chalet
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> clinic
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Garage
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-                                    </div>
-
-                                    <div class="search-row">
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Residential Land
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Office
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Commerce Bulding
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!-- End of  -->
-                                    </div>
-                                    <div class="search-row">
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Ware House
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Factory
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Commerce Landing
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!-- End of  -->
-                                    </div>
-                                    <div class="search-row">
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Swiming Pool
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Joy Path
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- End of  -->
-
-                                        <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Agricultural
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!-- End of  -->
-                                    </div>
-
                                 </div>
-
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -417,18 +243,19 @@
 
 
 
- <main class="main">
-    <section class="section">
-       <div id="like_and_subscribe">
-          <div class="hdcarousel_item">
-             <a href="/company/1">      <img src="{{asset('build/assets/front/assets/img/companies logo/متواضع.png')}}" alt=""></a>
-           </div>
-          <div class="hdcarousel_item"><img src="{{asset('build/assets/front/assets/img/companies logo/images123.png')}}" alt=""></div>
-          <div class="hdcarousel_item"><img src="{{asset('build/assets/front/assets/img/companies logo/245.jpg')}}" alt=""></div>
-          <div class="hdcarousel_item"><img src="{{asset('build/assets/front/assets/img/companies logo/16483966-240x180.webp')}}" alt=""></div>
-          <div class="hdcarousel_item"><img src="{{asset('build/assets/front/assets/img/companies logo/14800376-240x180.webp')}}" alt=""></div>
-       </div>
-    </section>
- </main>
+        <main class="main">
+            <section class="section">
+                <div id="like_and_subscribe">
+                    @foreach($companies as $company)
+                    <div class="hdcarousel_item">
+                        <a href="{{ route('companies.show', ['company' => $company->id]) }}">
+                            <img src="{{ asset('/' . $company->logo) }}" alt="{{ $company->name }}">
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </section>
+        </main>
+
 
  @endsection

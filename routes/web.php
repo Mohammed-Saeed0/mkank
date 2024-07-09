@@ -8,6 +8,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\SearchController;
+
 
 use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\CompanyAuthController;
@@ -60,7 +62,10 @@ Route::get('/', [HomeController::class, 'homePage'])->name('homepage');
 Route::get('/about', [AboutController::class, 'aboutPage']);
 Route::get('/faq', [FaqController::class, 'faq']);
 Route::get('/contact', [ContactController::class, 'contact']);
-Route::get('/companies', [CompanyController::class, 'allCompanies']);
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+Route::get('/companies/{company}', [CompanyController::class, 'show'])->name('companies.show');
+
+// Route::get('/companies', [CompanyController::class, 'allCompanies']);
 
 // Route::get('/properties', [PropertyController::class, 'index'])->name('property.index');
 // Route::get('/properties', [PropertyController::class, 'allProperties']);
@@ -93,6 +98,9 @@ Route::post('company/login', [CompanyAuthController::class, 'login'])->name('com
 // Route::post('company/logout', [CompanyAuthController::class, 'logout'])->name('company.logout');
 
 Route::get('/customer/profile', [CustomerController::class, 'profile'])->name('customer.profile')->middleware('customer');
+Route::get('/customer/profile/edit', [CustomerAuthController::class, 'edit'])->name('customer.edit')->middleware('customer');
+Route::post('/customer/profile/update', [CustomerAuthController::class, 'update'])->name('customer.update')->middleware('customer');
+
 Route::get('/company/profile', [CompanyController::class, 'profile'])->name('company.profile')->middleware('company');
 
 Route::get('/company/{id}', [CompanyController::class, 'singleCompany']);
@@ -117,6 +125,9 @@ Route::middleware('customer')->group(function () {
 //     Route::post('/company/properties', [PropertyController::class, 'store'])->name('properties.store');
 // });
 
+Route::get('/search', [SearchController::class, 'search'])->name('properties.search');
+Route::get('/properties/filter', [PropertyController::class, 'search'])->name('properties.filter');
+
 
 
 Route::middleware('company')->group(function () {
@@ -128,6 +139,8 @@ Route::middleware('company')->group(function () {
 });
 
 Route::get('properties', [PropertyController::class, 'index'])->name('properties.index');
+
+// Route::get('/properties/search', [PropertyController::class, 'search'])->name('properties.search');
 Route::get('properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 
 

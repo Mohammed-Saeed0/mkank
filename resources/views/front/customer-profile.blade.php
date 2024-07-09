@@ -1,14 +1,39 @@
 @extends('layouts.front.site')
 
 @section('content')
-    <div class="container">
-        <h1>Customer Profile</h1>
-        <div>
-            <strong>Name:</strong> {{ $customer->name }}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Profile</h3>
+                </div>
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <p id="name">{{ $customer->name }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <p id="email">{{ $customer->email }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <p id="phone">{{ $customer->phone }}</p>
+                    </div>
+                    <div class="text-center">
+                        <a href="{{ route('customer.edit') }}" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <strong>Email:</strong> {{ $customer->email }}
-        </div>
-        <!-- Add more customer details as needed -->
     </div>
+</div>
+
 @endsection

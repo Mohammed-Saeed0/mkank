@@ -19,6 +19,37 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <script>
+            // Assuming you have a form with id="searchForm" and a container to display results with id="searchResults"
+
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+    let query = formData.get('query'); // Assuming your search input name is 'query'
+
+    fetch(`/search?query=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            // Display search results on the page
+            let resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            data.forEach(property => {
+                // Example: Create HTML elements to display each property
+                let propertyElement = document.createElement('div');
+                propertyElement.innerHTML = `<h3>${property.title}</h3><p>${property.description}</p>`;
+                resultsContainer.appendChild(propertyElement);
+            });
+
+            // Update URL in the browser
+            let newUrl = `${window.location.origin}/search?query=${encodeURIComponent(query)}`;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+        })
+        .catch(error => console.error('Error fetching search results:', error));
+});
+
+        </script>
 
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/normalize.css')}}">
         <link rel="stylesheet" href="{{asset('build/assets/front/assets/css/font-awesome.min.css')}}">
